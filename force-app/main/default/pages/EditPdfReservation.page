@@ -1,0 +1,34 @@
+<apex:page standardController="Reservation__c" showheader="false" renderAs="pdf" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false">
+<h1>Voici les reservations efféctuées aujourd'huit</h1>
+
+<table border="1" style="width: 100%;  border-collapse: collapse; margin-top: 10px">
+    
+    <tr style="border: solid 2px black;">
+
+        <td colspan="11" style="text-align: center; background-color: #5daee3;border: solid 2px black;">
+             <P> La date de reservation est : </P> 
+          <apex:outputField value="{!Reservation__c.DateDeReservation__c}"></apex:outputField> 
+    </td>
+    </tr>
+    <tr style="text-align: center;background-color:aqua">
+        <th> bureau reservé</th>
+        <th>salle reservée</th>
+        <th>Propriétaire</th>
+            </tr>
+
+            <tr style="border: solid 2px black;">
+                <td style="text-align: center;border: solid 2px black;">
+                    <apex:outputField value="{!Reservation__c.bureau__r.Libelle__c}"></apex:outputField>
+                </td>
+                <td style="text-align: center;border: solid 2px black;">
+                    <apex:outputField value="{!Reservation__c.bureau__r.salle__r.libel__c}"></apex:outputField>
+                </td>
+                <td style="text-align: center;border: solid 2px black;">
+                    <apex:outputField  value="{!Reservation__c.CreatedById}"></apex:outputField>
+                </td>          
+            </tr>
+</table>
+
+
+
+</apex:page>

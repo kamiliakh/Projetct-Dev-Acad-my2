@@ -1,0 +1,133 @@
+<template>
+  <lightning-card>
+    <div class="slds-var-p-around_small">
+      <lightning-layout multiple-rows>
+        <lightning-layout-item
+          padding="around-small"
+          size="6"
+          medium-device-size="6"
+          large-device-size="6"
+        >
+          <lightning-input
+            type="date"
+            name="input2"
+            data-field="resdate"
+            label="choisir une date de reservation"
+          ></lightning-input>
+        </lightning-layout-item>
+
+        <lightning-layout-item
+          padding="around-small"
+          size="6"
+          medium-device-size="6"
+          large-device-size="6"
+        >
+          <lightning-button
+            type="submit"
+            label="Chercher une salle disponible"
+            onclick={handleSearchBureau}
+          ></lightning-button>
+        </lightning-layout-item>
+      </lightning-layout>
+
+      <template if:true={showSalles}>
+        <lightning-layout multiple-rows>
+          <lightning-layout-item
+            padding="around-small"
+            size="6"
+            medium-device-size="6"
+            large-device-size="6"
+          >
+            <lightning-combobox
+              name="My Records"
+              label="Salles disponibles"
+              value={value}
+              onchange={handleChangeSalle}
+              options={sallesOptions}
+            >
+            </lightning-combobox>
+          </lightning-layout-item>
+
+          <lightning-layout-item
+            padding="around-small"
+            size="6"
+            medium-device-size="6"
+            large-device-size="6"
+          >
+            <lightning-combobox
+              name="Bureaux disponibles"
+              class="sallesClass"
+              data-field="idbur"
+              data-id="Bureaux disponibles"
+              label="Bureaux disponible"
+              options={optionBureau}
+            >
+            </lightning-combobox>
+          </lightning-layout-item>
+
+          <lightning-layout-item
+            padding="around-small"
+            size="6"
+            medium-device-size="6"
+            large-device-size="6"
+          >
+            <lightning-button
+              type="submit"
+              label="faire une reservation"
+              onclick={handlereserve}
+            ></lightning-button>
+          </lightning-layout-item>
+        </lightning-layout>
+      </template>
+
+      <template if:true={showEdit}>
+        <lightning-layout-item
+          padding="around-small"
+          size="6"
+          medium-device-size="6"
+          large-device-size="6"
+        >
+          <iframe
+            frameborder="0"
+            src={url}
+            title="Content"
+            width="100%"
+            height="700px"
+            if:true={isEdit}
+          >
+          </iframe>
+
+          <lightning-button
+            type="submit"
+            label="Editer les reservation"
+            onclick={handleEdit}
+          ></lightning-button>
+        </lightning-layout-item>
+      </template>
+    </div>
+
+    <div>
+      <template if:true={isError}>
+        <p
+          style="
+            text-align: center;
+            color: rgb(235, 23, 23);
+            font-size: 18px;
+            font-style: oblique;
+          "
+        >
+          {MsgError }
+        </p>
+      </template>
+    </div> </lightning-card
+  ><br />
+
+  <!-- <lightning-button type="submit" label="Annuler" onclick={handleAnnule}> </lightning-button>  -->
+
+  <lightning-datatable
+    data={dataReservationDisplay}
+    columns={columns}
+    key-field="id"
+    onrowaction={handleAnnule}
+  ></lightning-datatable>
+</template>
